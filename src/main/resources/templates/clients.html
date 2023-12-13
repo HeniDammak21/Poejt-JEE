@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Location des voitures</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<div th:insert="/sidebar::navbar"></div>
+	<div class="container my-2">
+		<h1>Liste des clients</h1>
+
+		<a href="/add-client" class="btn btn-primary "> Add Client </a>
+		<br /><br />
+
+
+		<table border="1" class="table table-striped">
+			<thead class="table-primary">
+				<tr>
+					<th>Name Client</th>
+					<th>Last nameClient</th>
+					<th>Permis</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="client : ${listclient}">
+					<td th:text="${client.nomClient}"></td>
+					<td th:text="${client.prenomClient}"></td>
+					<td>
+						<span th:if="${client.permis != null}" th:text="${client.permis.dateObtention}"></span>
+						<span th:if="${client.permis == null}">N/A</span>
+					</td>
+					<td>
+						<div class="btn-group">
+							<a th:href="@{/view-client/{id}(id=${client.id})}" class="btn mx-2 btn-light">View</a>
+							<a th:href="@{/edit-client/{id}(id=${client.id})}"
+								class="btn mx-2 btn-outline-primary">Update</a>
+
+							<form th:action="@{/api/client/delete/{id}(id=${client.id})}" th:method="delete">
+								<button type="submit" class="btn btn-outline-danger">Delete</button>
+							</form>
+						</div>
+
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

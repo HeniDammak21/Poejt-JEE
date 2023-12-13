@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>View Vehicule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-5">
+    <h3>View Vehicule</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8 offset-md-2">
+
+                <form th:action="@{/api/vehicule/update}" th:object="${vehicule}" th:method="PUT">
+						<input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label for="immatriculation">Immatriculation Vehicule:</label>
+                        <input disabled type="text" class="form-control" id="immatriculation" name="immatriculation" th:field="*{immatriculation}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilometrage">Kilometrage:</label>
+                        <input disabled type="number" class="form-control" id="kilometrage" name="kilometrage" th:field="*{kilometrage}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date Mise En Service:</label>
+                        <input disabled type="date" class="form-control" id="date" name="date" th:field="*{dateMiseEnService}" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model">Model Vehicule:</label>
+                        <select disabled class="form-control" id="model" th:field="*{modelvehicules}">
+                            <option th:each="Model : ${listeModel}"
+                                    th:text="${Model.modelNom}"
+                                    th:value="${Model.id}">
+                            </option>
+                        </select>
+                    </div>
+                    <a href="/vehicules" class="btn btn-primary">back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Location des voitures</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div th:insert="/sidebar::navbar"></div>
+<div class="container my-2">
+    <h1>Liste des voitures affectées</h1>
+
+    <a  href="/add-estaffecter" class="btn btn-primary"> Add Affectation </a><br /><br />
+
+
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead class="table-primary">
+        <tr>
+            <th>Date Debut</th>
+            <th>Vehicule</th>
+            <th>Agence</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="estaffecter : ${listaffecter}">
+            <td th:text="${estaffecter.dateDebut}"></td>
+            <td>
+                <span th:if="${estaffecter.vehicule != null}" th:text="${estaffecter.vehicule.immatriculation}"></span>
+                <span th:if="${estaffecter.vehicule == null}">N/A</span>
+            </td>
+            <td>
+                <span th:if="${estaffecter.agence != null}" th:text="${estaffecter.agence.address}"></span>
+                <span th:if="${estaffecter.agence == null}">N/A</span>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a th:href="@{/view-estaffecter/{id}(id=${estaffecter.id})}" class="btn mx-2 btn-light">View</a>
+               <a th:href="@{/edit-estaffecter/{id}(id=${estaffecter.id})}" class="btn mx-2 btn-outline-primary">Update</a>
+
+
+    <form  th:action="@{/api/estaffecter/delete/{id}(id=${estaffecter.id})}" th:method="delete">
+        <button type="submit" class="btn mx-2 btn-outline-danger">Delete</button>
+    </form>
+</div>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
