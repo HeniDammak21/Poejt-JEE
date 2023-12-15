@@ -63,7 +63,7 @@
 						<ul class="sidebar-menu" data-widget="tree">
 							<li class="treeview">
 								<a href="#">
-									<i data-feather="users"></i>
+									<i data-feather="home"></i>
 									<span>Agences</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -78,7 +78,7 @@
 							</li>
 							<li class="treeview">
 								<a href="#">
-									<i data-feather="activity"></i>
+									<i data-feather="users"></i>
 									<span>Clients</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -91,10 +91,10 @@
 													class="path2"></span></i>Ajouter client</a></li>
 								</ul>
 							</li>
-
+							
 							<li class="treeview">
 								<a href="#">
-									<i data-feather="package"></i>
+									<i data-feather="database"></i>
 									<span>EstAffecter</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -104,13 +104,12 @@
 									<li><a href="/estaffecters"><i class="icon-Commit"><span class="path1"></span><span
 													class="path2"></span></i>Liste Affectation</a></li>
 									<li><a href="/add-estaffecter"><i class="icon-Commit"><span
-													class="path1"></span><span class="path2"></span></i>Ajouter
-											Affectation</a></li>
+													class="path1"></span><span class="path2"></span></i>Ajouter Affectation</a></li>
 								</ul>
 							</li>
-							<li class="treeview">
+								<li class="treeview">
 								<a href="#">
-									<i data-feather="calendar"></i>
+									<i data-feather="truck"></i>
 									<span>Vehicule</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -125,24 +124,23 @@
 							</li>
 							<li class="treeview">
 								<a href="#">
-									<i data-feather="monitor"></i>
+									<i data-feather="clipboard"></i>
 									<span>Model Voiture</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
 									</span>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="/modelvehicules"><i class="icon-Commit"><span
-													class="path1"></span><span class="path2"></span></i>Liste Models</a>
-									</li>
-									<li><a href="/add-model"><i class="icon-Commit"><span class="path1"></span><span
-													class="path2"></span></i>Ajouter
+									<li><a href="/modelvehicules"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Models</a></li>
+									<li><a href="/add-model"><i class="icon-Commit"><span
+													class="path1"></span><span class="path2"></span></i>Ajouter
 											Model</a></li>
 								</ul>
 							</li>
 							<li class="treeview">
 								<a href="#">
-									<i data-feather="calendar"></i>
+									<i data-feather="credit-card"></i>
 									<span>Permis</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -155,9 +153,9 @@
 													class="path2"></span></i>Ajouter Permis</a></li>
 								</ul>
 							</li>
-							<li class="treeview">
+								<li class="treeview">
 								<a href="#">
-									<i data-feather="users"></i>
+									<i data-feather="activity"></i>
 									<span>Reservation</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -166,14 +164,13 @@
 								<ul class="treeview-menu">
 									<li><a href="/reservations"><i class="icon-Commit"><span class="path1"></span><span
 													class="path2"></span></i>Liste Reservation</a></li>
-									<li><a href="/add-reservation"><i class="icon-Commit"><span
-													class="path1"></span><span class="path2"></span></i>Ajouter
-											Reservation</a></li>
+									<li><a href="/add-reservation"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Reservation</a></li>
 								</ul>
 							</li>
-							<li class="treeview">
+								<li class="treeview">
 								<a href="#">
-									<i data-feather="activity"></i>
+									<i data-feather="map-pin"></i>
 									<span>Villes</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
@@ -186,12 +183,13 @@
 													class="path2"></span></i>Ajouter Villes</a></li>
 								</ul>
 							</li>
-
+						
 						</ul>
 						<div class="sidebar-widgets">
 							<div class="mx-25 mb-30 pb-20 side-bx bg-primary-light rounded20">
 								<div class="text-center">
-									<img src="/static/images/voiture.png" class="sideimg p-5" alt="">
+									<img src="/static/images/voiture.png"
+										class="sideimg p-5" alt="">
 									<h4 class="title-bx text-primary">Make an Appointments</h4>
 									<p class="py-10 fs-14 mb-0 text-primary">
 										Best Cars Location here <i class="mdi mdi-arrow-right"></i>
@@ -244,7 +242,7 @@
 								<div class="form-group">
 									<label disable for="client">Permis:</label>
 									<select disabled class="form-control" id="client" th:field="*{permis}">
-										<option th:each="Permis : ${listepemris}" th:text="${Permis.dateObtention}"
+										<option th:each="Permis : ${listepemris}" th:text="${Permis.id}"
 											th:value="${Permis.id}">
 										</option>
 									</select>

@@ -2,76 +2,271 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>View permis</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>View Permis</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
-	<style>
-		body {
-			background-color: #f8f9fa;
-		}
-
-		.container {
-			margin-top: 50px;
-		}
-
-		h3 {
-			color: #007bff;
-		}
-
-		.card {
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		}
-
-		label {
-			font-weight: bold;
-		}
-
-		select,
-		input {
-			margin-bottom: 10px;
-		}
-
-		button {
-			margin-top: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="/static/css/vendors_css.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="stylesheet" href="/static/css/skin_color.css">
 </head>
 
-<body>
-	<div class="container my-5">
-		<h3> View permis</h3>
-		<div class="card">
-			<div class="card-body">
-				<div class="col-md-10">
-					<form th:action="@{/api/permis/update}" th:object="${permis}" th:method="PUT">
-						<input type="hidden" th:field="*{id}" />
-						<div class="form-group">
-							<label for="name">Date Obtention:</label>
-							<input disabled type="date" class="form-control" id="name" name="name" th:field="*{dateObtention}"
-								required />
-						</div>
-						<div class="form-group">
-							<label for="client">Client:</label>
-							<select disabled class="form-control" id="client" th:field="*{client}">
-								<option th:each="Client : ${listeClient}" th:text="${Client.nomClient}"
-									th:value="${Client.id}">
-								</option>
-							</select>
-						</div>
-						   <a href="/permis" class="btn btn-primary">Back</a>
-				
-					</form>
-
+<body class="hold-transition light-skin sidebar-mini theme-success fixed">
+	<div class="wrapper">
+		<div id="loader"></div>
+		<header class="main-header">
+			<div class="d-flex align-items-center logo-box justify-content-start">
+				<a href="/agences" class="logo">
+					<div class="logo-mini w-50">
+						<span class="light-logo"><img src="/static/images/logo.png" alt="logo"></span>
+						<span class="dark-logo"><img src="/static/images/logo.png" alt="logo"></span>
+					</div>
+					<div class="logo-lg">
+						<span class="light-logo"><img src="/static/images/location.png" alt="logo"></span>
+						<span class="dark-logo"><img src="/static/images/location.png" alt="logo"></span>
+					</div>
+				</a>
+			</div>
+			<nav class="navbar navbar-static-top">
+				<div class="app-menu">
+					<ul class="header-megamenu nav">
+						<li class="btn-group nav-item">
+							<a href="#" class="waves-effect waves-light nav-link push-btn btn-primary-light"
+								data-toggle="push-menu" role="button">
+								<i data-feather="align-left"></i>
+							</a>
+						</li>
+						<li class="btn-group d-lg-inline-flex d-none">
+							<div class="app-menu">
+								<div class="search-bx mx-5">
+									<form>
+										<div class="input-group">
+											<input type="search" class="form-control" placeholder="Search"
+												aria-label="Search" aria-describedby="button-addon2">
+											<div class="input-group-append">
+												<button class="btn" type="submit" id="button-addon3"><i
+														data-feather="search"></i></button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
+			</nav>
+		</header>
+		<aside class="main-sidebar">
+			<section class="sidebar position-relative">
+				<div class="multinav">
+					<div class="multinav-scroll" style="height: 100%;">
+						<ul class="sidebar-menu" data-widget="tree">
+							<li class="treeview">
+								<a href="#">
+									<i data-feather="home"></i>
+									<span>Agences</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/agences"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Agences</a></li>
+									<li><a href="/add-agence"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Agence</a></li>
+								</ul>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i data-feather="users"></i>
+									<span>Clients</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/clients"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Client</a></li>
+									<li><a href="/add-client"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter client</a></li>
+								</ul>
+							</li>
+							
+							<li class="treeview">
+								<a href="#">
+									<i data-feather="database"></i>
+									<span>EstAffecter</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/estaffecters"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Affectation</a></li>
+									<li><a href="/add-estaffecter"><i class="icon-Commit"><span
+													class="path1"></span><span class="path2"></span></i>Ajouter Affectation</a></li>
+								</ul>
+							</li>
+								<li class="treeview">
+								<a href="#">
+									<i data-feather="truck"></i>
+									<span>Vehicule</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/vehicules"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Vehicule</a></li>
+									<li><a href="/add-vehicule"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Vehicule</a></li>
+								</ul>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i data-feather="clipboard"></i>
+									<span>Model Voiture</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/modelvehicules"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Models</a></li>
+									<li><a href="/add-model"><i class="icon-Commit"><span
+													class="path1"></span><span class="path2"></span></i>Ajouter
+											Model</a></li>
+								</ul>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i data-feather="credit-card"></i>
+									<span>Permis</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/permis"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Permis</a></li>
+									<li><a href="/add-permis"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Permis</a></li>
+								</ul>
+							</li>
+								<li class="treeview">
+								<a href="#">
+									<i data-feather="activity"></i>
+									<span>Reservation</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/reservations"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Reservation</a></li>
+									<li><a href="/add-reservation"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Reservation</a></li>
+								</ul>
+							</li>
+								<li class="treeview">
+								<a href="#">
+									<i data-feather="map-pin"></i>
+									<span>Villes</span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-right pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="/villes"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Liste Villes</a></li>
+									<li><a href="/add-ville"><i class="icon-Commit"><span class="path1"></span><span
+													class="path2"></span></i>Ajouter Villes</a></li>
+								</ul>
+							</li>
+						
+						</ul>
+						<div class="sidebar-widgets">
+							<div class="mx-25 mb-30 pb-20 side-bx bg-primary-light rounded20">
+								<div class="text-center">
+									<img src="/static/images/voiture.png"
+										class="sideimg p-5" alt="">
+									<h4 class="title-bx text-primary">Make an Appointments</h4>
+									<p class="py-10 fs-14 mb-0 text-primary">
+										Best Cars Location here <i class="mdi mdi-arrow-right"></i>
+									</p>
+								</div>
+							</div>
+							<div class="copyright text-center m-25">
+								<p><strong class="d-block">Heni Dammak</strong> © All Rights Reserved</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</aside>
+
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<div class="container-full">
+				<!-- Content Header (Page header) -->
+				<div class="content-header">
+					<div class="d-flex align-items-center">
+						<div class="me-auto">
+							<h4 class="page-title">View un permis</h4>
+
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Main content -->
+				<section class="content">
+
+					<!-- Step wizard -->
+					<div class="box">
+						<!-- /.box-header -->
+						<div class="box-body wizard-content">
+							<form th:action="@{/api/permis/update}" th:object="${permis}" th:method="PUT">
+								<input type="hidden" th:field="*{id}" />
+								<div class="form-group">
+									<label for="name">Date Obtention:</label>
+									<input disabled type="date" class="form-control" id="name" name="name"
+										th:field="*{dateObtention}" required />
+								</div>
+								<div class="form-group">
+									<label for="client">Client:</label>
+									<select disabled class="form-control" id="client" th:field="*{client}">
+										<option th:each="Client : ${listeClient}" th:text="${Client.nomClient}"
+											th:value="${Client.id}">
+										</option>
+									</select>
+								</div>
+								
+								<a class="btn btn-info" href="/permis">Back</a>
+
+							</form>
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
+		<footer class="main-footer">
+			<div class="pull-right d-none d-sm-inline-block"></div>
+			<center>© Location Voiture 2023 | All Rights Reserved by <b>Heni Dammak</b> </center>
+		</footer>
 	</div>
+
+	<script src="/static/js/vendors.min.js"></script>
+	<script src="/static/js/pages/chat-popup.js"></script>
+	<script src="/static/assets/icons/feather-icons/feather.min.js"></script>
+	<script src="/static/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+	<script src="/static/assets/vendor_components/date-paginator/moment.min.js"></script>
+	<script src="/static/assets/vendor_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="/static/assets/vendor_components/date-paginator/bootstrap-datepaginator.min.js"></script>
+	<script src="/static/js/template.js"></script>
+	<script src="/static/js/pages/dashboard.js"></script>
+
 </body>
 
 </html>
